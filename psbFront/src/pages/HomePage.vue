@@ -52,8 +52,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="mainP">
             <div class="VL">
                 <div class="mainHead">
@@ -103,14 +101,17 @@
                         </div>
                     </div>
                     <div class="rightMainB" style="float:right">
-                        <IconCard class="icCard" cardImage='my-proj.svg' text="Мой проект и команда" link="/"/>
-                        <IconCard class="icCard" cardImage='permission.svg' text="Доступ" link="/"/>
+                        <IconCard class="icCard" cardImage='my-proj.svg' text="Мой проект и команда" link="/project"/>
+                        <IconCard class="icCard" cardImage='permission.svg' text="Доступ" link="/connections"/>
                         <IconCard class="icCard" cardImage='command.svg' text="Команда банка" link="/"/>
                         <IconCard class="icCard" cardImage='support.svg' text="Поддержка" link="/"/>
                     </div>
 
                 </div>
             </div>
+        </div>
+        <div class="lil" v-show="is_img">
+
         </div>
     </div>
 </template>
@@ -135,12 +136,11 @@
             this.userData = await UserApiService.getById();
         },
         created() {
-            this.$store.commit("setC")
+            /*this.$store.commit("setC")*/
             this.qCards=this.$store.state.qCards
         },
         methods: {
             handlerCheck(v) {
-
                 if(v.isChecked){
                     v.isChecked = false;
                 }else{
@@ -151,6 +151,9 @@
             },
         },
         computed: {
+            is_img(){
+                return this.$store.state.user.is_admin
+            },
             user1() {
                 if (this.$store.state.user) {
                     return [this.$store.state.user.email, this.$store.state.user.passwrd]
@@ -197,7 +200,14 @@
         padding-left: 170px;
         padding-right: 200px;
     }
-
+    .lil{
+        background-image: url(../assets/img/bigBadSleep.svg);
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:1080px;
+    }
     .typcInB {
         display: inline-block;
         margin-right: 20px;

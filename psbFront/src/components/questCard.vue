@@ -1,5 +1,5 @@
 <template>
-    <a class="questCard">
+    <a class="questCard" v-on:click="bad">
         <div style="position: relative;height:100%;width:100%">
             <div style="font-size:20px;color:#34398E;font-family: gilroy-semibold">{{CardData.headr}}</div>
             <div>
@@ -13,7 +13,7 @@
                 <span style="display: inline-block; margin-right:5px" v-for="item in CardData.imgs" v-bind:key="item">
                     <img v-bind:src="require(`../assets/img/${item}`)">
                 </span>
-                <span style="display: inline-block;float:right;margin-right:20px" >
+                <span style="display: inline-block;float:right; margin-right:20px">
                     <input
                             style="height:16px;width:16px"
                             type="checkbox"
@@ -40,19 +40,28 @@
                 type: Object,
                 required: true
             },
-
+            link:{
+                type: String,
+                required: false
+            }
 
         },
         methods: {
             emitCheck(){
                 this.$emit('check')
             },
+            bad(){
+                if(this.CardData.id===4){this.$router.push("test")}
+
+
+            }
         },
     }
 </script>
 
 <style scoped>
     .questCard {
+        float:left;
         display:inline-block;
         padding: 10px;
         margin: 10px;
